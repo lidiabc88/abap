@@ -16,6 +16,19 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Hay dos tipos de tablas: internas y bases de datos
+  " para las tablas internas se usa: LOOP AT
+  " para las bases de datos se usa: SELECT
+
+ " hay tablas de bases de datos hechas a las que podemos hacer referencia con /dmo/xxx{
+ " y cogerá los datos de esa tabla
+ " la estructura es data ls_empleado type /dmo/airport
+
+ "para navegar por esas tablas debe ser desde la cuenta trial con cnt y pulsar encima con el cursor
+
+
   types: BEGIN OF ty_persona,
 
        nombre   TYPE string,
@@ -27,8 +40,6 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
        email type string,
 
    END OF TY_persona.
-
-
 
 
 
@@ -151,7 +162,7 @@ insert ls_cliente into lt_cliente index 2.
        telefono TYPE  string, "el telefono es string
 
        email type string,
-"fghjfghjh
+
    END OF TY_persona2.
 
 
