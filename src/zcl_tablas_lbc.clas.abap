@@ -202,74 +202,74 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    TYPES:BEGIN OF ty_empleado,
-            nombre   TYPE string,
-            edad     TYPE /dmo/carrier_id,
-            telefono TYPE string,
-            correo   TYPE string,
-
-          END OF ty_empleado.
-
-    DATA ls_empleado TYPE ty_empleado.
-    DATA lt_empleado TYPE TABLE OF ty_empleado. "es estandar
-*      data lt_empleado2 type STANDARD TABLE OF ty_empleado. "podemos elegir si es estandar
-*      data lt_empleado3 TYPE table of ty_empleado. "standar declarada de otra manera
-*      data lt_empleado_sorted type sorted TABLE OF ty_empleado with NON-UNIQUE key correo. "puede tener tambien UNIQUE
-*      data lt_empleado_hash type HASHED TABLE OF ty_empleado with UNIQUE key correo. "
-
-    "INTO TABLE LO ENVIA EN EL SIGUIENTE CAMPO QUE ENCUENTRA
-    "INDEX te lo pone en la posicion que le dices, ejemplos abajo:
-
-    ls_empleado-nombre = 'Daniel'.
-    ls_empleado-edad = 30.
-    ls_empleado-telefono = '+346121314'.
-    ls_empleado-correo = 'daniel@gmail.com'.
-
-    INSERT ls_empleado INTO lt_empleado INDEX 2.
-
-    ls_empleado-nombre = 'Paco'.
-    ls_empleado-edad = 33.
-    ls_empleado-telefono = '+34958265471'.
-    ls_empleado-correo = 'toniar1969@gmail.com'.
-
-
-    INSERT ls_empleado INTO lt_empleado INDEX 3.
-
-    ls_empleado-nombre = 'Lidia'.
-    ls_empleado-edad = 37.
-    ls_empleado-telefono = '+34666999222'.
-    ls_empleado-correo = 'lidia9@gmail.com'.
-
-    INSERT ls_empleado INTO lt_empleado INDEX 4.
-
-    ls_empleado-nombre = 'Juan'.
-    ls_empleado-edad = 22.
-    ls_empleado-telefono = '+346112255'.
-    ls_empleado-correo = 'juan@gmail.com'.
-
-    INSERT ls_empleado INTO lt_empleado INDEX 1. "a juan lo manda a la fila 2
-
-
-    LOOP AT lt_empleado INTO ls_empleado. "
-
-      out->write( |nombre-> { ls_empleado-nombre }, edad-> { ls_empleado-edad } | ).
-
-    ENDLOOP.
-
-    IF ls_empleado-nombre = 'Fernando'. "para buscar la fila de Fernando
-
-      out->write( ls_empleado ).
-    ENDIF.
+*    TYPES:BEGIN OF ty_empleado,
+*            nombre   TYPE string,
+*            edad     TYPE /dmo/carrier_id,
+*            telefono TYPE string,
+*            correo   TYPE string,
+*
+*          END OF ty_empleado.
+*
+*    DATA ls_empleado TYPE ty_empleado.
+*    DATA lt_empleado TYPE TABLE OF ty_empleado. "es estandar
+**      data lt_empleado2 type STANDARD TABLE OF ty_empleado. "podemos elegir si es estandar
+**      data lt_empleado3 TYPE table of ty_empleado. "standar declarada de otra manera
+**      data lt_empleado_sorted type sorted TABLE OF ty_empleado with NON-UNIQUE key correo. "puede tener tambien UNIQUE
+**      data lt_empleado_hash type HASHED TABLE OF ty_empleado with UNIQUE key correo. "
+*
+*    "INTO TABLE LO ENVIA EN EL SIGUIENTE CAMPO QUE ENCUENTRA
+*    "INDEX te lo pone en la posicion que le dices, ejemplos abajo:
+*
+*    ls_empleado-nombre = 'Daniel'.
+*    ls_empleado-edad = 30.
+*    ls_empleado-telefono = '+346121314'.
+*    ls_empleado-correo = 'daniel@gmail.com'.
+*
+*    INSERT ls_empleado INTO lt_empleado INDEX 2.
+*
+*    ls_empleado-nombre = 'Paco'.
+*    ls_empleado-edad = 33.
+*    ls_empleado-telefono = '+34958265471'.
+*    ls_empleado-correo = 'toniar1969@gmail.com'.
+*
+*
+*    INSERT ls_empleado INTO lt_empleado INDEX 3.
+*
+*    ls_empleado-nombre = 'Lidia'.
+*    ls_empleado-edad = 37.
+*    ls_empleado-telefono = '+34666999222'.
+*    ls_empleado-correo = 'lidia9@gmail.com'.
+*
+*    INSERT ls_empleado INTO lt_empleado INDEX 4.
+*
+*    ls_empleado-nombre = 'Juan'.
+*    ls_empleado-edad = 22.
+*    ls_empleado-telefono = '+346112255'.
+*    ls_empleado-correo = 'juan@gmail.com'.
+*
+*    INSERT ls_empleado INTO lt_empleado INDEX 1. "a juan lo manda a la fila 2
+*
+*
+*    LOOP AT lt_empleado INTO ls_empleado. "
+*
+*      out->write( |nombre-> { ls_empleado-nombre }, edad-> { ls_empleado-edad } | ).
+*
+*    ENDLOOP.
+*
+*    IF ls_empleado-nombre = 'Fernando'. "para buscar la fila de Fernando
+*
+*      out->write( ls_empleado ).
+*    ENDIF.
 
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     "Si queremos encontrar todas personas que tengan 23 y que nos salga su nombre, telefono y correo
 
-    IF ls_empleado-edad = '23'.
-      out->write( |nombre-> { ls_empleado-nombre }, telefono-> { ls_empleado-telefono }, correo-> { ls_empleado-correo } | ).
-
-    ENDIF.
-
+*    IF ls_empleado-edad = '23'.
+*      out->write( |nombre-> { ls_empleado-nombre }, telefono-> { ls_empleado-telefono }, correo-> { ls_empleado-correo } | ).
+*
+*    ENDIF.
+*
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Ejercicio: inventarse datos de 4 registros de la bd de aeropueto
@@ -277,6 +277,24 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
 
     DATA ls_aeropuerto TYPE /dmo/airport.
     DATA lt_aeropuerto TYPE TABLE OF /dmo/airport.
+    DATA lt_filtracion TYPE TABLE OF /dmo/airport.
+
+*       TYPES:BEGIN OF ty_prueba,
+*            name   TYPE /dmo/airport_name,
+*            city   TYPE /dmo/city,
+*
+*
+*          END OF ty_prueba.
+*
+*    DATA ls_prueba TYPE ty_prueba.
+*    DATA lt_prueba TYPE TABLE OF ty_prueba.
+
+
+
+    "la forma antigua seria:
+    " ls_aeropuerto-airport_id = 'MDD'.
+    " ls_aeropuerto-name = 'Aeropuerto deMadrid'.
+    " ls_aeropuerto-city = 'Madrid'.data
 
     "la forma moderna seria:
     " ls_aeropuerto = value #
@@ -290,12 +308,14 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
     ls_aeropuerto-city = 'Bangkok'.
     ls_aeropuerto-country = 'TH'.
 
+
+
     INSERT ls_aeropuerto INTO TABLE lt_aeropuerto.
 
     ls_aeropuerto-airport_id = 'MLG'.
     ls_aeropuerto-name = 'Aeropuerto de Málaga'.
     ls_aeropuerto-city = 'Málaga'.
-    ls_aeropuerto-country = 'SP'.
+    ls_aeropuerto-country = 'DE'.
 
     INSERT ls_aeropuerto INTO TABLE lt_aeropuerto.
 
@@ -313,29 +333,70 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
 
     INSERT ls_aeropuerto INTO TABLE lt_aeropuerto.
 
-
-    out->write( 'TABLA' ).
-    out->write( lt_aeropuerto ).
+*
+*    out->write( 'TABLA' ).
+*    out->write( lt_aeropuerto ).
 
     DATA lv_aeropuerto_find TYPE i.
 
-    out->write( 'Filtración' ).
+    "out->write( 'Filtración' ).
+
+
+LOOP AT lt_aeropuerto INTO ls_aeropuerto.
+
+    if   ls_aeropuerto-country =  'DE'.
+     "    out->write( ls_aeropuerto ).
+
+    INSERT ls_aeropuerto INTO TABLE lt_filtracion.
+
+    endif.
+
+
+ ENDLOOP.
+out->write( 'Filtración' ).
+out->write( lt_filtracion ).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     "Si queremos encontrar todos los aeropuertos que empiecen por "M":
     "forma 1 de hacerlo:
 
-    LOOP AT lt_aeropuerto INTO ls_aeropuerto.
-
-      lv_aeropuerto_find = find( val = ls_aeropuerto-city sub = 'M' ).
-
-      IF lv_aeropuerto_find = 0.
-
-        out->write( ls_aeropuerto ).
-
-      ENDIF.
-
-    ENDLOOP.
+*    LOOP AT lt_aeropuerto INTO ls_aeropuerto.
+*
+*      lv_aeropuerto_find = find( val = ls_aeropuerto-city sub = 'M' ).
+*
+*      IF lv_aeropuerto_find = 0.
+*
+*        out->write( ls_aeropuerto ).
+*
+*      ENDIF.
+*
+*    ENDLOOP.
 
     "forma 2 de hacerlo:
 
@@ -356,6 +417,35 @@ CLASS zcl_tablas_lbc IMPLEMENTATION.
 
 *    endloop.
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"OTRO EJERCICIO: CREAR UNA NUEVA TABLA PERO CON SOLO DOS REGISTROS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*DATA lt_vuelos type table of ty_vuelos.
 
   ENDMETHOD.
 ENDCLASS.
