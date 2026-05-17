@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_estructura_lbc IMPLEMENTATION.
+CLASS ZCL_ESTRUCTURA_LBC IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

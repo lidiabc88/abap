@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_primeraclase_lbc IMPLEMENTATION.
+CLASS ZCL_PRIMERACLASE_LBC IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
 
 
@@ -54,5 +56,4 @@ lv_int = 10.
 
 
   ENDMETHOD.
-
 ENDCLASS.

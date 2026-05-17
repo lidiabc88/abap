@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_procesamiento_lbc IMPLEMENTATION.
+CLASS ZCL_PROCESAMIENTO_LBC IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

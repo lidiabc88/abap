@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_bucles_lbc IMPLEMENTATION.
+CLASS ZCL_BUCLES_LBC IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
@@ -114,5 +114,4 @@ CLASS zcl_bucles_lbc IMPLEMENTATION.
      out->write( 'Fin de programa' ).
 
   ENDMETHOD.
-
 ENDCLASS.

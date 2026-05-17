@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_cadena_lbc IMPLEMENTATION.
+CLASS ZCL_CADENA_LBC IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

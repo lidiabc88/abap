@@ -11,7 +11,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_ejestructuras_lbc IMPLEMENTATION.
+CLASS ZCL_EJESTRUCTURAS_LBC IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
@@ -158,5 +159,4 @@ CLASS zcl_ejestructuras_lbc IMPLEMENTATION.
     out->write( ls_deep ).
 
   ENDMETHOD.
-
 ENDCLASS.

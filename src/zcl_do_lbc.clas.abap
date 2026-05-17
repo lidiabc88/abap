@@ -12,7 +12,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_do_lbc IMPLEMENTATION.
+CLASS ZCL_DO_LBC IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
