@@ -10,116 +10,178 @@ CLASS zcl_estructura_lbc DEFINITION
   PRIVATE SECTION.
 ENDCLASS.
 
-
-
 CLASS ZCL_ESTRUCTURA_LBC IMPLEMENTATION.
 
 
-  METHOD if_oo_adt_classrun~main.
+METHOD if_oo_adt_classrun~main.
 
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "Estructura simple
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ESTRUCTURA SIMPLE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  data lv_var type string VALUE '+340000 '.
+    DATA lv_var TYPE string VALUE '+340000'.
 
-  TYPES : BEGIN OF ty_persona,
-          nombre   type string,
-          edad     type i,
-          telefono type string,
-          email    TYPE string,
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CREACIÓN DE UN TIPO
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-        END of TY_persona.
+    TYPES: BEGIN OF ty_persona,
 
-  data ls_persona type ty_persona. " creacion de una estructura con su asignacion de tipo, no se le han asignado aun valores
-  data ls_cliente  type ty_persona.
-  data ls_empleado type ty_persona.
+             nombre TYPE string,
+             edad TYPE i,
+             telefono TYPE string,
+             email TYPE string,
 
-  out->write( ls_empleado ).
+           END OF ty_persona.
 
-  ls_cliente-nombre = 'Daniel'.
-  ls_cliente-edad = 33.
-  ls_cliente-telefono = '+346660001211'.
-  ls_cliente-email = 'daniel@blabla.com'.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DECLARACIÓN DE ESTRUCTURAS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  ls_empleado-nombre = 'Paco'.
-  ls_empleado-edad = 50.
+    " Estructura vacía sin valores
 
-  out->write( ls_empleado ).
-  out->write( ls_cliente ).
-  out->write( ls_persona ).
+    DATA ls_persona TYPE ty_persona.
 
+    DATA ls_cliente TYPE ty_persona.
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" también lo podemos simplificar en:
-" forma 2:
-" data (ls_empleado2) = value ty_empleado ( nombre= 'daniel' edad = 32 telefono = = '+34000000').
-" forma 3 mezclada:
-" ls_empleado = value # ( nombre= 'sara' edad = 32 telefono = = '+34000000').
+    DATA ls_empleado TYPE ty_persona.
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MOSTRAR ESTRUCTURA VACÍA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" esta estructura se crea de golpe en la linea ? y en esa misma linea con el value ty_persoana ( que se creo en la linea 22 ) se le asigna el tipo y luego le damos valores
-data(ls_persona2) = value ty_persona(
-nombre = 'daniel'
-edad = 32
-email = 'daniel @.com'
-telefono = '6000000' ).
+    out->write( ls_empleado ).
 
-" esta estructura se ha declarado/creado en la linea ? al igual que se le ha asignado su tipo , por eso no ponemos el data y ponemos #  y luego le damos valores
-ls_persona = value #(
-nombre = 'Fernado'
-edad = 32
-email = 'daniel @.com'
-telefono = '6000000' ).
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ASIGNAR VALORES A UNA ESTRUCTURA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"EJERCICIO 1: stock muebles
+    ls_cliente-nombre = 'Daniel'.
+    ls_cliente-edad = 33.
+    ls_cliente-telefono = '+346660001211'.
+    ls_cliente-email = 'daniel@blabla.com'.
 
-  TYPES : BEGIN OF ty_muebles,
-          Sofas   type i,
-          Mesas   type i,
-          Sillas type i,
-          Camas type i,
-          END OF ty_muebles.
+    ls_empleado-nombre = 'Paco'.
+    ls_empleado-edad = 50.
 
-data: ls_muebles TYPE ty_muebles.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MOSTRAR ESTRUCTURAS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    ls_muebles-Sofas = 10.
-    ls_muebles-Mesas = 20.
-    ls_muebles-Sillas = 30.
-    ls_muebles-Camas = 40.
+    out->write( ls_empleado ).
+
+    out->write( ls_cliente ).
+
+    out->write( ls_persona ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OTRAS FORMAS DE CREAR ESTRUCTURAS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Forma 2:
+    " DATA(ls_empleado2) = VALUE ty_persona(
+    " nombre = 'Daniel'
+    " edad = 32
+    " telefono = '+34000000' ).
+
+    " Forma 3:
+    " ls_empleado = VALUE #(
+    " nombre = 'Sara'
+    " edad = 32
+    " telefono = '+34000000' ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VALUE TY_PERSONA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Se crea la estructura y se asigna el tipo
+    " en la misma línea
+
+    DATA(ls_persona2) = VALUE ty_persona(
+
+      nombre = 'Daniel'
+      edad = 32
+      email = 'daniel@correo.com'
+      telefono = '6000000'
+
+    ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VALUE #
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " La estructura ya existe previamente,
+    " por eso usamos VALUE #
+
+    ls_persona = VALUE #(
+
+      nombre = 'Fernando'
+      edad = 32
+      email = 'fernando@correo.com'
+      telefono = '6000000'
+
+    ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EJERCICIO 1 - STOCK DE MUEBLES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    TYPES: BEGIN OF ty_muebles,
+
+             sofas TYPE i,
+             mesas TYPE i,
+             sillas TYPE i,
+             camas TYPE i,
+
+           END OF ty_muebles.
+
+    DATA ls_muebles TYPE ty_muebles.
+
+    ls_muebles-sofas = 10.
+    ls_muebles-mesas = 20.
+    ls_muebles-sillas = 30.
+    ls_muebles-camas = 40.
 
     out->write( ls_muebles ).
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ESTRUCTURA ANIDADA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Estructura anidada
+    " También se pueden crear estructuras directamente
 
-*data: BEGIN OF ls_empleado,
-*      nombre TYPE string value 'laura'.
-*      id type i value 5 ,
-*      email type /dmo/email_address value 'kdsjfhlsfu'.
+*    DATA: BEGIN OF ls_empleado,
 *
-*      END OF ls_empleado
+*            nombre TYPE string VALUE 'Laura',
+*            id TYPE i VALUE 5,
+*            email TYPE /dmo/email_address VALUE 'correo@gmail.com',
 *
-*      out->write( ls_empleado )
+*          END OF ls_empleado.
+*
+*    out->write( ls_empleado ).
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CREAR DOMINIOS Y DATA ELEMENTS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    " 1. Botón derecho sobre package
+    " 2. Crear Domain
+    " 3. Crear Data Element
+    " 4. Asignar el dominio al Data Element
+    " 5. Activar ambos
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"EJERCICIO CREAR UN DOMINIO Y DATA ELEMENT PARA:
-"botón derecho, crear dominio, nombre: ZDO_nombreId_iniciales , datos: int8 19, activar.
-"Luego creas el Data element igual (en other element), nombre:ZDE_ID_iniciales
-"en type pones despues ZDE_taltal y se pone
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EJEMPLO CON DATA ELEMENT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  TYPES : BEGIN OF ty_empleado,
-          nombre   type ZDE_NOMBRE_LBC , "se quedaría así como ejemplo en lugar de lo que pone abajo
-          edad     type i,
-          telefono type string,
-          email    TYPE string,
+    TYPES: BEGIN OF ty_empleado,
 
-        END of TY_empleado.
+             nombre TYPE zde_nombre_lbc,
+             edad TYPE i,
+             telefono TYPE string,
+             email TYPE string,
 
+           END OF ty_empleado.
 
-
-  ENDMETHOD.
+ENDMETHOD.
 ENDCLASS.

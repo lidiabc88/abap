@@ -17,6 +17,94 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INSERT INITIAL LINE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" INSERT INITIAL LINE INTO TABLE lt_tabla
+" inserta una línea vacía en la tabla
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INSERT LINES OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" INSERT LINES OF lt_tabla1 INTO TABLE lt_tabla2
+" copia todos los registros de una tabla a otra
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LIKE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" DATA lt_tabla2 LIKE lt_tabla1
+" hereda la estructura y tipos de la tabla original
+" pero NO copia los datos
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COPIAR UNA SOLA LÍNEA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" INSERT LINES OF lt_tabla1 FROM 1 TO 1
+" INTO TABLE lt_tabla2
+
+" copia únicamente la línea 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COPIAR VARIAS LÍNEAS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" INSERT LINES OF lt_tabla1 FROM 2 TO 4
+" INTO TABLE lt_tabla2
+
+" copia desde la línea 2 hasta la 4
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" APPEND
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" APPEND añade siempre el registro
+" al FINAL de la tabla
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INSERT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" INSERT añade el registro en la primera posición libre
+" o en una posición concreta usando INDEX
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LIKE VS LINE OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" LIKE copia la estructura/tipo de una tabla
+
+" LINE OF crea una estructura con el tipo
+" de línea de una tabla interna
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RANDOM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Genera números aleatorios
+
+" seed = semilla aleatoria
+" min = número mínimo
+" max = número máximo
+
+*DATA(lv_random) = cl_abap_random_int=>create(
+*
+*                  seed = cl_abap_random=>seed( )
+*                  min = 1
+*                  max = 100 ).
+*
+*DATA(lv_numero) = lv_random->get_next( ).
+*
+*out->write( lv_numero ).
+
+
+
+
+
+
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     "EJERCICIO PRÁCTICO
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -51,16 +139,19 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
 
 *    2. Crear una segunda tabla que copie los tipos directamemte de la
 *    tabla original 'lt_tabla1', a la nueva tabla 'lt_tabla2'
+
     out->write( |  | ).
     out->write( |Ejercicio 2 - LIKE| ).
 
-    DATA lt_tabla1 LIKE lt_empleado.
+    DATA lt_tabla1 LIKE lt_empleado. "Copia la estructura pero NO los datos
     DATA lt_tabla2 LIKE lt_empleado.
 
     out->write( |  | ).
     out->write( | TABLA 2 | ).
     out->write( lt_tabla2 ).
 
+
+    "Copiar los registros:
     INSERT LINES OF lt_empleado INTO TABLE lt_tabla2.
 
 *    3. En lt_tabla2 introduce en la línea 2 una línea en blanco
@@ -96,6 +187,7 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
 
     "random se trata de una función que al llamarla 2 veces
     "los valores serán diferentes
+
     DATA(lv_random) = cl_abap_random_int=>create(
                     seed = cl_abap_random=>seed( )
                     min  = 1

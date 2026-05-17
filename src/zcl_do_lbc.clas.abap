@@ -6,52 +6,80 @@ CLASS zcl_do_lbc DEFINITION
   PUBLIC SECTION.
 
     INTERFACES if_oo_adt_classrun .
+
   PROTECTED SECTION.
   PRIVATE SECTION.
+
 ENDCLASS.
 
 
 
-CLASS ZCL_DO_LBC IMPLEMENTATION.
+CLASS zcl_do_lbc IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "DO
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DO
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " DO repite el bloque el número de veces indicado
 
     DATA lv_num TYPE i VALUE 0.
 
     DO 5 TIMES.
+
       lv_num = lv_num + 1.
+
       out->write( lv_num ).
+
     ENDDO.
 
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "WHILE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" WHILE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " WHILE se ejecuta mientras
+    " la condición sea verdadera
 
     DATA lv_num2 TYPE i VALUE 0.
 
     WHILE lv_num2 < 10.
+
       lv_num2 += 1.
+
       out->write( lv_num2 ).
+
     ENDWHILE.
 
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "FOR (con EXIT)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" WHILE + EXIT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " EXIT finaliza el bucle inmediatamente
 
     DATA lv_num3 TYPE i VALUE 0.
 
     WHILE lv_num3 < 10.
+
       lv_num3 += 1.
+
       out->write( lv_num3 ).
 
       IF lv_num3 = 3.
+
         EXIT.
+
       ENDIF.
+
     ENDWHILE.
 
-    out->write( 'Fin de programa' ).
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FIN DEL PROGRAMA
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    out->write( 'Fin del programa' ).
 
   ENDMETHOD.
+
 ENDCLASS.

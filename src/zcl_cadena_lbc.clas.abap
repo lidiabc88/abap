@@ -6,46 +6,100 @@ CLASS zcl_cadena_lbc DEFINITION
   PUBLIC SECTION.
 
     INTERFACES if_oo_adt_classrun .
+
   PROTECTED SECTION.
   PRIVATE SECTION.
+
 ENDCLASS.
 
 
 
-CLASS ZCL_CADENA_LBC IMPLEMENTATION.
+CLASS zcl_cadena_lbc IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VARIABLES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-data lv_vr TYPE string value 'experis experis' .
-data lv_nume TYPE i.
+    DATA lv_var TYPE string VALUE 'experis experis'.
 
-"STRLEN
- " data(lv_num) = strlen( 'Daniel' ).
+    DATA lv_num TYPE i.
 
-*out->write( lv_num ). "Devolverá el numero de la cadena de caracteres, en este caso Daniel tiene 6 letras
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STRLEN
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"COUNT
-"    lv_num = count( val = lv_var sub = 'ex' ).
+    " Devuelve la longitud de una cadena
 
-*out->write( lv_num ). "Devolverá el numero veces que se cumple ciertos criterios en una tabla
+*    DATA(lv_num2) = strlen( 'Daniel' ).
+*
+*    out->write( lv_num2 ).
 
-"COUNT_ANY_OF
-"COUNT_ANY_NOT_OF
+    " Resultado -> 6
 
-"FIND
- " lv_num = find( val = lv_var sub = 'is' ). "Devuelve la primera vez que vemos is
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COUNT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"FIND_ANY_OF
- "   lv_num = find_any( val = lv_var sub = 'is' ). "Devuelve la primera ocurrencia de cualquiera de los caracteres
+    " Cuenta cuántas veces aparece un texto
 
-"FIND_ANY_NOT_OF
-  "  lv_num = find_any_not_of( val = lv_var sub = 'is' ). "Devuelve primera aparicion de cualquier caracter individual
+*    lv_num = count( val = lv_var sub = 'ex' ).
+*
+*    out->write( lv_num ).
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"FUNCIONES DE PROCESAMIENTO
+    " Resultado -> 2
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COUNT_ANY_OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Cuenta coincidencias de cualquiera
+    " de los caracteres indicados
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COUNT_ANY_NOT_OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Cuenta caracteres diferentes
+    " a los indicados
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FIND
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Devuelve la posición de la primera coincidencia
+
+*    lv_num = find( val = lv_var sub = 'is' ).
+*
+*    out->write( lv_num ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FIND_ANY_OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Busca cualquiera de los caracteres indicados
+
+*    lv_num = find_any_of( val = lv_var sub = 'is' ).
+*
+*    out->write( lv_num ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FIND_ANY_NOT_OF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " Devuelve la primera posición de un carácter
+    " distinto a los indicados
+
+*    lv_num = find_any_not_of( val = lv_var sub = 'is' ).
+*
+*    out->write( lv_num ).
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FUNCIONES DE PROCESAMIENTO
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   ENDMETHOD.
+
 ENDCLASS.
