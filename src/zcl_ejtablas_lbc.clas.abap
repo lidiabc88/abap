@@ -100,9 +100,46 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
 *
 *out->write( lv_numero ).
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"STANDAR TABLE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"La que se crea por defecto si no se especifica el tipo de en su momento de creacion.
+"El tipo de acceso ques se usa en las tablas internas.
+"Es lineal, es decir, irá registro x registro hasta encontrar lo deseado.
+"Ocupa poca memoria y se le puede añadir regitro rapidamente pero es poco eficiente si necesitamos buscar registros con frecuencia
+"sobretodo si la BD tiene mucha entradas
+
+"cuando la usamos??? -> cuando las tablas son pequeña (pocas entrasds)
+                   " -> cuando las entrads pueden procesarse en el orden exacto en el que se insertaron.
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"TABLAS SORT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Las filas tienn asignado un indice interno, apareceran ordenadas respecto a su clave que puede ser única o no única
+"el acceso se realiza con la clave
 
+"cuando la usamos??? -> cuando se espera un gran número de accesos afines.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"TABLA HASHED
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Se accede con un algoritmo numerico llamado "hash funcion" en el cual determina la posicion de un resgistro partiendo de una determinada clave
+
+"cuando la usamos??? -> si la accion mas frecuente es acceder a una linea, por la clve. Eso será así cuando , por jemplo, al crear una tabla interna
+"que se parezca a una tabla de BD. Es adecuanda cuando queremos procesar grandes cantidades de datos, no merece la pena con tabls pequeñas.
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"CLAVES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Las claves identifican cada entrwda de una tabla. Hay dos tipos:
+"           - estandar
+"           - clave definida por el usiario
+
+" el progrmador puede decidir si la clave es única (UNIQUE) o no (NON-UNIQUE).
+
+"       *IMPORTANTE: la clave de las tablas estandar NO pueden ser única
+"                    la clave de las tablas hashed SIEMPRE son únicas.
 
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
