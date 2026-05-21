@@ -1,4 +1,4 @@
-CLASS zcl_deberes_lbc DEFINITION
+CLASS zcl_ejdo_lbc DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -12,15 +12,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_deberes_lbc IMPLEMENTATION.
+CLASS zcl_ejdo_lbc IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
-
-
-
-
-
-
   ENDMETHOD.
 ENDCLASS.
