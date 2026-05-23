@@ -73,9 +73,6 @@ CLASS ZCL_EJESTRUCTURAS_LBC IMPLEMENTATION.
              INCLUDE TYPE ty_airlines.
     TYPES: END OF ty_include_flights.
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DECLARACIÓN DE VARIABLES
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     DATA ls_flights         TYPE ty_flights.
     DATA ls_airlines        TYPE ty_airlines.

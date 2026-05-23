@@ -12,138 +12,15 @@ ENDCLASS.
 
 
 
-CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
+CLASS zcl_ejtablas_lbc IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" INSERT INITIAL LINE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" INSERT INITIAL LINE INTO TABLE lt_tabla
-" inserta una línea vacía en la tabla
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" INSERT LINES OF
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" INSERT LINES OF lt_tabla1 INTO TABLE lt_tabla2
-" copia todos los registros de una tabla a otra
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LIKE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" DATA lt_tabla2 LIKE lt_tabla1
-" hereda la estructura y tipos de la tabla original
-" pero NO copia los datos
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COPIAR UNA SOLA LÍNEA
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" INSERT LINES OF lt_tabla1 FROM 1 TO 1
-" INTO TABLE lt_tabla2
-
-" copia únicamente la línea 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COPIAR VARIAS LÍNEAS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" INSERT LINES OF lt_tabla1 FROM 2 TO 4
-" INTO TABLE lt_tabla2
-
-" copia desde la línea 2 hasta la 4
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" APPEND
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" APPEND añade siempre el registro
-" al FINAL de la tabla
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" INSERT
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" INSERT añade el registro en la primera posición libre
-" o en una posición concreta usando INDEX
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LIKE VS LINE OF
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" LIKE copia la estructura/tipo de una tabla
-
-" LINE OF crea una estructura con el tipo
-" de línea de una tabla interna
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RANDOM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Genera números aleatorios
-
-" seed = semilla aleatoria
-" min = número mínimo
-" max = número máximo
-
-*DATA(lv_random) = cl_abap_random_int=>create(
-*
-*                  seed = cl_abap_random=>seed( )
-*                  min = 1
-*                  max = 100 ).
-*
-*DATA(lv_numero) = lv_random->get_next( ).
-*
-*out->write( lv_numero ).
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"STANDAR TABLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"La que se crea por defecto si no se especifica el tipo de en su momento de creacion.
-"El tipo de acceso ques se usa en las tablas internas.
-"Es lineal, es decir, irá registro x registro hasta encontrar lo deseado.
-"Ocupa poca memoria y se le puede añadir regitro rapidamente pero es poco eficiente si necesitamos buscar registros con frecuencia
-"sobretodo si la BD tiene mucha entradas
-
-"cuando la usamos??? -> cuando las tablas son pequeña (pocas entrasds)
-                   " -> cuando las entrads pueden procesarse en el orden exacto en el que se insertaron.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"TABLAS SORT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Las filas tienn asignado un indice interno, apareceran ordenadas respecto a su clave que puede ser única o no única
-"el acceso se realiza con la clave
-
-"cuando la usamos??? -> cuando se espera un gran número de accesos afines.
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"TABLA HASHED
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Se accede con un algoritmo numerico llamado "hash funcion" en el cual determina la posicion de un resgistro partiendo de una determinada clave
-
-"cuando la usamos??? -> si la accion mas frecuente es acceder a una linea, por la clve. Eso será así cuando , por jemplo, al crear una tabla interna
-"que se parezca a una tabla de BD. Es adecuanda cuando queremos procesar grandes cantidades de datos, no merece la pena con tabls pequeñas.
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"CLAVES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Las claves identifican cada entrwda de una tabla. Hay dos tipos:
-"           - estandar
-"           - clave definida por el usiario
-
-" el progrmador puede decidir si la clave es única (UNIQUE) o no (NON-UNIQUE).
-
-"       *IMPORTANTE: la clave de las tablas estandar NO pueden ser única
-"                    la clave de las tablas hashed SIEMPRE son únicas.
 
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "EJERCICIO PRÁCTICO
+    "EJERCICIO PRÁCTICO 1, TABLA
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 *    1. Crear una nueva tabla e introducir datos de la forma 'moderna'
@@ -193,7 +70,7 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
 
 *    3. En lt_tabla2 introduce en la línea 2 una línea en blanco
     out->write( |  | ).
-    out->write( |Ejercicio 3 - INSERT INITAL LINE| ).
+    out->write( |Ejercicio 3 - INSERT INITIAL LINE| ).
 
     INSERT INITIAL LINE INTO lt_tabla2 INDEX 2.
 
@@ -250,6 +127,101 @@ CLASS ZCL_EJTABLAS_LBC IMPLEMENTATION.
     out->write( lt_tabla1 ).
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   EJERCICIO 2:
+"       Para la tabla de DB /dmo/airport
+"           1. extraer todos los registros del campo country = UK
+"           2. extraer unicamente el nombre (del campo nombre) que está asociado a LGW del campo airport_id
+"           3. extraer con la tabla sorted todos los registros donde country sea igual a IT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 1.
+
+  SELECT FROM /dmo/airport
+  FIELDS *
+  WHERE country = 'UK'
+  INTO TABLE @DATA(lt_flights1).
+
+  out->write( | | ).
+  out->write( 'EJERCICIO 1:' ).
+  out->write( lt_flights1 ).
+
+
+" 2.
+
+  SELECT FROM /dmo/airport
+  FIELDS name
+  WHERE airport_id = 'LGW'
+  INTO TABLE @DATA(lt_flights2).
+
+  IF sy-subrc = 0.
+    out->write( 'EJERCICIO 2:' ).
+    out->write( lt_flights2 ).
+    out->write( ' ' ).
+  ENDIF.
+
+
+" 3.
+   DATA lt_flights_sorted TYPE SORTED TABLE OF /dmo/airport WITH NON-UNIQUE KEY airport_id.
+
+  SELECT FROM /dmo/airport
+  FIELDS *
+  WHERE country = 'IT'
+  INTO TABLE @lt_flights_sorted.
+
+  IF sy-subrc = 0.
+    out->write( 'EJERCICIO 3:' ).
+    out->write( lt_flights_sorted ).
+    out->write( ' ' ).
+  ENDIF.
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" HASHED TABLE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+*       TYPES: BEGIN OF ty_usuario,
+*                 id     TYPE i,
+*                 nombre TYPE string,
+*               END OF ty_usuario.
+*
+*       DATA lt_usuarios TYPE HASHED TABLE OF ty_usuario
+*       WITH UNIQUE KEY id.
+*
+*       INSERT VALUE #(
+*       id = 1
+*       nombre = 'Luis'
+*       ) INTO TABLE lt_usuarios.
+*
+*       INSERT VALUE #(
+*       id = 2
+*       nombre = 'Ana'
+*       ) INTO TABLE lt_usuarios.
+*
+*       READ TABLE lt_usuarios INTO DATA(ls_usuario) WITH KEY id = 1.
+*
+*       IF sy-subrc = 0.
+*        out->write( ls_usuario ).
+*       ENDIF.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SORTED TABLE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+*    DATA lt_flight_sort TYPE SORTED TABLE OF /dmo/airport WITH NON-UNIQUE key airport_id.
+*
+*    SELECT from /dmo/airport
+*    FIELDS *
+*    into table @lt_flight_sort.
+*
+*    read table lt_flight_sort into data(ls_flight) with table key airport_id = 'LAS'.
+*
+*    out->write( ls_flight ).
+*
+*    data(ls_flight2) = lt_flight_sort[ key primary_key airport_id = 'LAS' ].
+*
+*    out->write( ls_flight2 ).
 
   ENDMETHOD.
 ENDCLASS.

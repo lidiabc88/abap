@@ -137,9 +137,6 @@ CLASS zcl_procesamiento_lbc IMPLEMENTATION.
 
     DATA(lv_number) = match( val = lv_text pcre = lv_pattern occ = 1 ).
 
-""""""""""""""""""""
-" MOSTRAR RESULTADO
-""""""""""""""""""""
 
     out->write( lv_number ).
 

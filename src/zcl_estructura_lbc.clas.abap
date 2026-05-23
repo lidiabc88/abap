@@ -154,7 +154,7 @@ METHOD if_oo_adt_classrun~main.
 *
 *            nombre TYPE string VALUE 'Laura',
 *            id TYPE i VALUE 5,
-*            email TYPE /dmo/email_address VALUE 'correo@gmail.com',
+*           email TYPE /dmo/email_address VALUE 'correo@gmail.com',
 *
 *          END OF ls_empleado.
 *

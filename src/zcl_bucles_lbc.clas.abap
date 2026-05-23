@@ -104,53 +104,41 @@ CLASS zcl_bucles_lbc IMPLEMENTATION.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NÚMEROS ALEATORIOS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    " seed = genera una semilla aleatoria
-    " min = valor mínimo
-    " max = valor máximo
-
 *    DATA(lv_random) =
 *    cl_abap_random_int=>create(
 *
-*      seed = cl_abap_random=>seed( )
+*      seed = cl_abap_random=>seed( )    " seed = genera una semilla aleatoria
 *      min = 1
 *      max = 100
 *
 *    )->get_next( ).
 
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EJERCICIO DESCUENTOS POR EDAD
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EJERCICIO DESCUENTOS POR EDAD:
 
     " Menores o iguales a 12 años -> 5€
     " Entre 13 y 18 años -> 10€
     " Entre 19 y 65 años -> 20€
     " Mayores de 65 años -> 10€
 
+
     DATA lv_edad TYPE i.
 
-""""""""""""""""""""
-" GENERAR EDAD ALEATORIA
-""""""""""""""""""""
-
-    lv_edad =
+    lv_edad =                       "Declaramos un numero random
     cl_abap_random_int=>create(
 
       seed = cl_abap_random=>seed( )
       min = 1
       max = 100
-
     )->get_next( ).
-
-""""""""""""""""""""
-" MOSTRAR EDAD
-""""""""""""""""""""
 
     out->write( |Edad generada: { lv_edad }| ).
 
-""""""""""""""""""""
-" COMPROBAR DESCUENTO
-""""""""""""""""""""
+
+    "Comprobamos el descuento:
 
     IF lv_edad <= 12.
 
@@ -169,10 +157,6 @@ CLASS zcl_bucles_lbc IMPLEMENTATION.
       out->write( 'Tienes un descuento de 10€' ).
 
     ENDIF.
-
-""""""""""""""""""""
-" FIN DEL PROGRAMA
-""""""""""""""""""""
 
     out->write( 'Fin del programa' ).
 

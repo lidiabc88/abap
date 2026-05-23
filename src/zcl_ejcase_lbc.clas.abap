@@ -29,26 +29,26 @@ CLASS zcl_ejcase_lbc IMPLEMENTATION.
 "   - El de 9 -> Luis
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-*    DATA lv_edad TYPE i.
-*
-*    CASE lv_edad.
-*
-*  WHEN 8.
-*    out->write( 'El padre se llama Ricardo' ).
-*
-*  WHEN 6.
-*    out->write( 'El padre se llama Pedro' ).
-*
-*  WHEN 5.
-*    out->write( 'El padre se llama Fernando' ).
-*
-*  WHEN 9.
-*    out->write( 'El padre se llama Luis' ).
-*
-*  WHEN OTHERS.
-*    out->write( 'No sabemos el nombre del padre, aunque el niño es Daniel' ).
-*
-*ENDCASE.
+    DATA lv_edad TYPE i.
+
+    CASE lv_edad.
+
+  WHEN 8.
+    out->write( 'El padre se llama Ricardo' ).
+
+  WHEN 6.
+    out->write( 'El padre se llama Pedro' ).
+
+  WHEN 5.
+    out->write( 'El padre se llama Fernando' ).
+
+  WHEN 9.
+    out->write( 'El padre se llama Luis' ).
+
+  WHEN OTHERS.
+    out->write( 'No sabemos el nombre del padre, aunque el niño es Daniel' ).
+
+ENDCASE.
 
 
 " Dentro podemos poner los if que queramos

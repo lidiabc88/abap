@@ -19,6 +19,29 @@ CLASS zcl_primeraclase_lbc IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
+
+ """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ " ¿Qué datos necesito? Ejemplo: nombre y edad
+
+" Entonces:
+
+* DATA lv_nombre TYPE string.
+* DATA lv_edad   TYPE i.
+" ...
+
+" PASO 2 — ¿Es un solo dato o varios juntos?
+
+"           Si son varios:  TYPES: BEGIN OF ty_persona,
+
+" PASO 3 — ¿Uno solo o muchos?
+
+"           Uno: DATA ls_persona TYPE ty_persona.
+"           Muchos: DATA lt_personas TYPE TABLE OF ty_persona.
+
+
+" PASO 4 — ¿Qué tengo que HACER? aquí ya entra if, case, loop...
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FORMAS DE DECLARAR VARIABLES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
