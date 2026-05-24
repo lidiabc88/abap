@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZCL_PRIMERACLASE_LBC</CLSNAME>
+    <CLSNAME>ZCL_EJ_IF_LBC</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>MI PRIMER PAQUETE</DESCRIPT>
+    <DESCRIPT>ejercicios del if</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
