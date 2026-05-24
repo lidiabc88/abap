@@ -1,1 +1,0 @@
-Ejercicios varios trial version
