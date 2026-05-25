@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZCL_PRIMERACLASE_LBC</CLSNAME>
+    <CLSNAME>ZCL_CARGAR_LBC</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>primera clase</DESCRIPT>
+    <DESCRIPT>carga de la primera BD</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

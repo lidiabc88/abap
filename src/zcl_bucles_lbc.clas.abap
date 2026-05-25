@@ -20,7 +20,9 @@ CLASS zcl_bucles_lbc IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" IF
+" IF: comprobar condiciones
+"     ejecutar una cosa u otra
+"     (comparar valores, hacer reglas, cuando tengamos condiciones distintas...)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 *    DATA lv_nombre TYPE string VALUE 'Daniel'.
@@ -74,7 +76,8 @@ CLASS zcl_bucles_lbc IMPLEMENTATION.
 *    ENDIF.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CASE
+" CASE: cuando UNA varieble tiene MUCHOS valores posibles
+"       (estados, códigos, tipos, zonas, categorías...)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 *    DATA lv_edad TYPE i.

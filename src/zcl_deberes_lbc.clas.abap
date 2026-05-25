@@ -15,37 +15,81 @@ CLASS zcl_deberes_lbc IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
-    TYPES: BEGIN OF ty_persona,
+*    TYPES: BEGIN OF ty_persona,
+*
+*             nombre   TYPE string,
+*             edad     TYPE i,
+*             telefono TYPE string,
+*             correo   TYPE string,
+*
+*           END OF ty_persona.
+*
+*    DATA ls_persona TYPE ty_persona.
+*
+*    DATA lt_persona TYPE TABLE OF ty_persona.
+*
+*    lt_persona = VALUE #(
+*
+*      ( nombre   = 'Pepa'
+*        edad     = 32
+*        telefono = '+34000000'
+*        correo   = 'pepa@gmail.com' )
+*
+*      ( nombre   = 'Antonio'
+*        edad     = 22
+*        telefono = '+34000001'
+*        correo   = 'antonio@gmail.com' )
+*
+*      ( nombre   = 'Lola'
+*        edad     = 28
+*        telefono = '+34000002'
+*        correo   = 'lola@gmail.com' )
+*
+*    ).
 
-             nombre   TYPE string,
-             edad     TYPE i,
-             telefono TYPE string,
-             correo   TYPE string,
+SELECT FROM /dmo/airport
+FIELDS *
+WHERE country = 'US'
+INTO TABLE @DATA(lt_aeropuertos_usa).
 
-           END OF ty_persona.
+out->write( 'EJERCICIO 1:' ).
+out->write( lt_aeropuertos_usa ).
 
-    DATA ls_persona TYPE ty_persona.
+DATA ls_aeropuerto TYPE /dmo/airport.
 
-    DATA lt_persona TYPE TABLE OF ty_persona.
+DATA lt_aeropuertos_l TYPE TABLE OF /dmo/airport.
 
-    lt_persona = VALUE #(
+LOOP AT lt_aeropuertos_usa
+INTO ls_aeropuerto
+WHERE city CP 'L*'.
 
-      ( nombre   = 'Pepa'
-        edad     = 32
-        telefono = '+34000000'
-        correo   = 'pepa@gmail.com' )
+  INSERT ls_aeropuerto INTO TABLE lt_aeropuertos_l.
 
-      ( nombre   = 'Antonio'
-        edad     = 22
-        telefono = '+34000001'
-        correo   = 'antonio@gmail.com' )
+ENDLOOP.
 
-      ( nombre   = 'Lola'
-        edad     = 28
-        telefono = '+34000002'
-        correo   = 'lola@gmail.com' )
+out->write( | | ).
+out->write( 'EJERCICIO 2:' ).
+out->write( lt_aeropuertos_l ).
 
-    ).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   ENDMETHOD.
 
