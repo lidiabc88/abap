@@ -17,12 +17,12 @@ CLASS zcl_bd_lbc IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
-     " ------------------------------------------------------------
-    " 1. EXTRAER TODA LA INFORMACION DE LA BASE DE DATOS
-    "    Y VOLCARLA EN UNA TABLA INTERNA
-    " ------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Crear una nueva base de datos y meterle mínimo 3 registros/filas.
+" En una nueva clase, extraer toda la info
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    SELECT FROM zbd_empleado_lbc
+    SELECT FROM zbd_empleado_lbc  "esta es la BD que he creado
       FIELDS client,
              id_empleado,
              nombre,
@@ -37,41 +37,41 @@ CLASS zcl_bd_lbc IMPLEMENTATION.
       INTO TABLE @DATA(lt_empleados).
 
 
-    " ------------------------------------------------------------
-    " 2. MOSTRAR TODA LA TABLA INTERNA POR CONSOLA
-    " ------------------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mostrar la tabla por consola
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    out->write( '========================================' ).
+
     out->write( 'TODOS LOS EMPLEADOS DE LA BASE DE DATOS' ).
-    out->write( '========================================' ).
+    out->write( |  | ).
     out->write( lt_empleados ).
 
 
-    " ------------------------------------------------------------
-    " 3. INDICAR EL TAMAÑO TOTAL DE LA BASE DE DATOS
-    " ------------------------------------------------------------
+ """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tamaño total de la BD
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     DATA lv_total TYPE i.
 
     lv_total = lines( lt_empleados ).
 
-    out->write( '========================================' ).
+    out->write( |  | ).
     out->write( 'TAMAÑO TOTAL DE LA BASE DE DATOS' ).
-    out->write( '========================================' ).
+    out->write( |  | ).
     out->write( |Total de registros: { lv_total }| ).
 
 
-    " ------------------------------------------------------------
-    " 4. BUSCAR EL REGISTRO DE JULIA@COM
-    " ------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buscar el registro @julia
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     READ TABLE lt_empleados INTO DATA(ls_empleado)
       WITH KEY correo = 'julia@com'.
 
 
-    " ------------------------------------------------------------
-    " 5. MOSTRAR EL REGISTRO Y SU INDEX / POSICION
-    " ------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mostrar el resgistro y su index (posicion)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     IF sy-subrc = 0.
 
@@ -79,23 +79,23 @@ CLASS zcl_bd_lbc IMPLEMENTATION.
 
       lv_index = sy-tabix.
 
-      out->write( '========================================' ).
+      out->write( |  | ).
       out->write( 'REGISTRO ENCONTRADO CON CORREO JULIA@COM' ).
-      out->write( '========================================' ).
+      out->write( |  | ).
 
       out->write( ls_empleado ).
 
-      out->write( '========================================' ).
+      out->write( |  | ).
       out->write( 'POSICION DEL REGISTRO EN LA TABLA INTERNA' ).
-      out->write( '========================================' ).
+      out->write( |  | ).
 
       out->write( |Index encontrado: { lv_index }| ).
 
     ELSE.
 
-      out->write( '========================================' ).
+      out->write( |  | ).
       out->write( 'REGISTRO NO ENCONTRADO' ).
-      out->write( '========================================' ).
+      out->write( |  | ).
 
       out->write( 'No existe ningun empleado con correo julia@com' ).
 
