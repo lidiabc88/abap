@@ -1,25 +1,13 @@
-CLASS zcl_ej_if_lbc DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_EJ_IF_LBC definition
+  public
+  create private .
 
-  PUBLIC SECTION.
-
-    INTERFACES if_oo_adt_classrun .
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+public section.
+protected section.
+private section.
 ENDCLASS.
 
 
 
-CLASS zcl_ej_if_lbc IMPLEMENTATION.
-
-
-  METHOD if_oo_adt_classrun~main.
-
-
-  " hola :)
-
-
-  ENDMETHOD.
+CLASS ZCL_EJ_IF_LBC IMPLEMENTATION.
 ENDCLASS.
