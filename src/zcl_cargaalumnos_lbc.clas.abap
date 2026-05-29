@@ -120,39 +120,33 @@ CLASS zcl_cargaalumnos_lbc IMPLEMENTATION.
   " EJERCICIO EXTRA. CON ESO, AHORA AÑADIR NUEVOS USUARIOS EN LA BD Y QUE GENERE EL ID DE FORMA AUTOMATICA
   " NO DE GOLPE COMO ARRIBA. EL NUEVO NOMBRE QUE SUBAMOS SE ALMACENA EN UNA VARIABLE NORMAL
 
-DATA lv_nuevo_nombre TYPE string.
-
-lv_nuevo_nombre = 'Daniel'.
+    DATA lv_nuevo_nombre TYPE string value 'Daniel'.
 
 " Contamos registros actuales de la BD
     SELECT FROM zdb_alumnos_lbc
-    FIELDS COUNT( * )
-    INTO @lv_total.
+    FIELDS @abap_true           "si hay filas devuelveme una x
+    INTO @DATA(lv_existe).
 
-    lv_total = lv_total + 1.        " Nuevo ID = total + 1
+    IF lv_existe = abap_true.
+                    " ya hay alguien con ese nombre -> NO insertar, avisar al usuario.
+    ELSE.
 
-    lv_id = lv_total.
+    SELECT COUNT( * ) FROM zdb_alumnos_lbc INTO @DATA(lv_count2).
+        lv_count2 = lv_count2 + 1.
 
+        INSERT zdb_alumnos_lbc FROM @(
+            VALUE #(
+              id_alumno = lv_id
+              nombre    = lv_nuevo_nombre
+            )
+          ).
 
-    INSERT zdb_alumnos_lbc FROM @(      " Insertamos nuevo alumno
-    VALUE #(
-    client     = sy-mandt
-    id_alumno  = lv_id
-    nombre     = lv_nuevo_nombre
-  )
-).
+    ENDIF.
+    ENDSELECT.
 
-out->write( | | ).
-out->write( 'NUEVO ALUMNO INSERTADO:' ).
-out->write( | | ).
-
-SELECT SINGLE
-  FROM zdb_alumnos_lbc
-  FIELDS *
-  WHERE id_alumno = @lv_id
-  INTO @DATA(ls_nuevo_alumno).
-
-out->write( ls_nuevo_alumno ).
+    out->write( | | ).
+    out->write( 'NUEVO ALUMNO INSERTADO:' ).
+    out->write( | | ).
 
  ENDMETHOD.
   ENDCLASS.

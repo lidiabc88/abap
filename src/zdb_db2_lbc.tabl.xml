@@ -35,7 +35,7 @@
    <TABL_EXTRAS>
     <TDDAT>
      <TABNAME>ZDB_DB2_LBC</TABNAME>
-     <CCLASS>CUS_DEV_SUP_RO</CCLASS>
+     <CCLASS>CUS_DEV_SUP_DA</CCLASS>
     </TDDAT>
    </TABL_EXTRAS>
   </asx:values>
