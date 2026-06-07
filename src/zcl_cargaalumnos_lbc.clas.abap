@@ -120,7 +120,7 @@ CLASS zcl_cargaalumnos_lbc IMPLEMENTATION.
   " EJERCICIO EXTRA. CON ESO, AHORA AÑADIR NUEVOS USUARIOS EN LA BD Y QUE GENERE EL ID DE FORMA AUTOMATICA
   " NO DE GOLPE COMO ARRIBA. EL NUEVO NOMBRE QUE SUBAMOS SE ALMACENA EN UNA VARIABLE NORMAL
 
-    DATA lv_nuevo_nombre TYPE string value 'Daniel'.
+     DATA lv_nuevo_nombre TYPE string value 'Daniel'.
 
 " Contamos registros actuales de la BD
     SELECT FROM zdb_alumnos_lbc

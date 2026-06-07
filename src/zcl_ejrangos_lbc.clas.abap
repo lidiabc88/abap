@@ -28,6 +28,12 @@ CLASS zcl_ejrangos_lbc IMPLEMENTATION.
     APPEND VALUE #( sign = 'I' option = 'EQ' low = 'LH' ) TO lr_companias.
     APPEND VALUE #( sign = 'I' option = 'EQ' low = 'SQ' ) TO lr_companias.
 
+"                           Forma moderna de eso
+"                           TYPES tt_carried TYPE RANGE F /dmo/carrier_id
+"                           DATA(carrid_range= VALUE tt_carried(
+"                           ( sign = 'I' option = 'EQ' low = 'AA' )
+"                           ( sign = 'I' option = 'EQ' low = 'LH' )
+"                           ( sign = 'I' option = 'EQ' low = 'SQ' ) ) ).
 
    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " TAREA 2 - RANGO DE FECHAS ENTRE 01.01.2025 Y 30.06.2026
@@ -65,89 +71,6 @@ CLASS zcl_ejrangos_lbc IMPLEMENTATION.
     APPEND VALUE #( sign = 'I' option = 'LE' low = 50 ) TO lr_precios.
 
 
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " CONSULTA TAREA 1 - VUELOS DE AA, LH Y SQ
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    SELECT FROM /dmo/flight
-      FIELDS carrier_id,
-             connection_id,
-             flight_date,
-             price,
-             currency_code,
-             seats_max,
-             seats_occupied
-      WHERE carrier_id IN @lr_companias
-      INTO TABLE @DATA(lt_vuelos_companias).
-
-    out->write( |  | ).
-    out->write( 'TAREA 1 - VUELOS DE AA, LH Y SQ' ).
-    out->write( |  | ).
-    out->write( lt_vuelos_companias ).
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " CONSULTA TAREA 2 - VUELOS ENTRE DOS FECHAS
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    SELECT FROM /dmo/flight
-      FIELDS carrier_id,
-             connection_id,
-             flight_date,
-             price,
-             currency_code,
-             seats_max,
-             seats_occupied
-      WHERE flight_date IN @lr_fechas
-      INTO TABLE @DATA(lt_vuelos_fechas).
-
-   out->write( |  | ).
-    out->write( 'TAREA 2 - VUELOS ENTRE 01.01.2025 Y 30.06.2025' ).
-   out->write( |  | ).
-    out->write( lt_vuelos_fechas ).
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " CONSULTA TAREA 3 - CONEXIONES QUE EMPIEZAN POR 1
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    SELECT FROM /dmo/flight
-      FIELDS carrier_id,
-             connection_id,
-             flight_date,
-             price,
-             currency_code,
-             seats_max,
-             seats_occupied
-      WHERE connection_id IN @lr_conexiones
-      INTO TABLE @DATA(lt_vuelos_conexiones).
-
-    out->write( |  | ).
-    out->write( 'TAREA 3 - CONEXIONES QUE EMPIEZAN POR 1' ).
-    out->write( |  | ).
-    out->write( lt_vuelos_conexiones ).
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " CONSULTA TAREA 4 - TODAS LAS COMPAÑIAS EXCEPTO UA
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    SELECT FROM /dmo/flight
-      FIELDS carrier_id,
-             connection_id,
-             flight_date,
-             price,
-             currency_code,
-             seats_max,
-             seats_occupied
-      WHERE carrier_id IN @lr_excluir_ua
-      INTO TABLE @DATA(lt_vuelos_sin_ua).
-
-    out->write( |  | ).
-    out->write( 'TAREA 4 - TODAS LAS COMPAÑIAS EXCEPTO UA' ).
-    out->write( |  | ).
-    out->write( lt_vuelos_sin_ua ).
-
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " CONSULTA TAREA 5 - PRECIO MAYOR 100 O MENOR/IGUAL 50
@@ -164,45 +87,60 @@ CLASS zcl_ejrangos_lbc IMPLEMENTATION.
       WHERE price IN @lr_precios
       INTO TABLE @DATA(lt_vuelos_precios).
 
-    out->write( |  | ).
-    out->write( 'TAREA 5 - PRECIO MAYOR 100 O MENOR/IGUAL 50' ).
-    out->write( |  | ).
-    out->write( lt_vuelos_precios ).
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " TAREA 6 - CONSULTA COMBINADA
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" versión profe
 
     SELECT FROM /dmo/flight
-      FIELDS carrier_id,
-             connection_id,
-             flight_date,
-             price,
-             currency_code,
-             seats_max,
-             seats_occupied
-      WHERE carrier_id IN @lr_companias
-        AND flight_date IN @lr_fechas
-        AND carrier_id IN @lr_excluir_ua
-      INTO TABLE @DATA(lt_vuelos_combinado).
+     FIELDS carrier_id,
+         connection_id,
+         flight_date,
+         price
 
-    DATA lv_total TYPE i.
+     WHERE carrier_id IN @lr_companias
+       AND price IN @lr_precios
 
-    lv_total = lines( lt_vuelos_combinado ).
+     INTO TABLE @DATA(lt_vuelos).
 
-    out->write( |  | ).
-    out->write( 'TAREA 6 - CONSULTA COMBINADA' ).
-    out->write( |  | ).
-    out->write( lt_vuelos_combinado ).
+    out->write( |Vuelos encontrados: { lines( lt_vuelos ) }| ).
 
-    out->write( |  | ).
-    out->write( 'TOTAL DE LINEAS DEVUELTAS' ).
-    out->write( |  | ).
-    out->write( |Total: { lv_total }| ).
+    out->write( lt_vuelos ).
 
-    out->write( |  | ).
-    out->write( lt_vuelos_combinado ).
+
+" VERSIÓN MÍA:
+
+*    SELECT FROM /dmo/flight
+*      FIELDS carrier_id,
+*             connection_id,
+*             flight_date,
+*             price,
+*             currency_code,
+*             seats_max,
+*             seats_occupied
+*      WHERE carrier_id IN @lr_companias
+*        AND flight_date IN @lr_fechas
+*        AND carrier_id IN @lr_excluir_ua
+*      INTO TABLE @DATA(lt_vuelos_combinado).
+*
+*    DATA lv_total TYPE i.
+*
+*    lv_total = lines( lt_vuelos_combinado ).
+*
+*    out->write( |  | ).
+*    out->write( 'TAREA 6 - CONSULTA COMBINADA' ).
+*    out->write( |  | ).
+*    out->write( lt_vuelos_combinado ).
+*
+*    out->write( |  | ).
+*    out->write( 'TOTAL DE LINEAS DEVUELTAS' ).
+*    out->write( |  | ).
+*    out->write( |Total: { lv_total }| ).
+
+*    out->write( |  | ).
+*    out->write( lt_vuelos_combinado ).
 
 
   ENDMETHOD.
