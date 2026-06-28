@@ -1,0 +1,16 @@
+CLASS zbp_r_recetas_lbc DEFINITION
+  PUBLIC
+  ABSTRACT
+  FINAL
+  FOR BEHAVIOR OF zr_recetas_lbc.
+
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zbp_r_recetas_lbc IMPLEMENTATION.
+
+
+
+ENDCLASS.

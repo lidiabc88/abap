@@ -1,0 +1,11 @@
+@EndUserText.label: 'Access Control Recetas'
+@MappingRole: true
+
+define role ZR_RECETAS_LBC {
+
+  grant
+    select
+      on ZR_RECETAS_LBC
+        where Publicada = 'X';
+
+}
