@@ -14,6 +14,9 @@ authorization master ( global )
     RecetaID;
 
   field ( readonly )
+  // añadido otro ejercicio
+    Categoria,
+  // fin del añadido nuevo
     Publicada,
     CreatedBy,
     CreatedAt,
@@ -36,6 +39,10 @@ authorization master ( global )
 
   determination setPublicada on modify { create; }
   validation validateTiempo on save { create; update; }
+
+   // Ini - Lidia 29/06/26
+  determination setInitialCategoria on save { create; }
+  // Fin - Lidia 29/06/26
 
   mapping for ZRECETAS_LBC
   {

@@ -50,5 +50,7 @@ CLASS zcl_select_lbc IMPLEMENTATION.
 
         MODIFY zbd_empleado_der FROM TABLE @lt_empleados.  "se suben los datos
 
+
+
   ENDMETHOD.
 ENDCLASS.

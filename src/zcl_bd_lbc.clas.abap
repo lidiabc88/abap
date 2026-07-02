@@ -17,8 +17,28 @@ CLASS zcl_bd_lbc IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"CREAR UNA BD
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " key con los campos clave que no se repiten, como un DNI
+    " not null se suele poner casi siempre en key y es para decir que el campo es OBLIGATORIO
+    " lo que va después del : puedes darle a cnt + espacio y buscar.
+    "                         ej. si es fecha -> abap.dats que es la palabra clave
+    " acaba en ;
+    " IMPORTANTE: antes de activar es imprescindible que esté bien escrito o sino luego es fatidico cambiarlo
+
+
+    "modify - > modificar
+    "delete - > borrar
+            "delete lt_empleado FROM 2 to 4
+            "delete lt_empleado index 2.
+            "delete lt_empleados WHERE nombre is INITIAL
+            "DELETE  ADJACENT DUPLICATES FROM lt_empleados COMPARING nombre -> para campos duplicados
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Crear una nueva base de datos y meterle mínimo 3 registros/filas.
+" EJERCICIO: Crear una nueva base de datos y meterle mínimo 3 registros/filas.
 " En una nueva clase, extraer toda la info
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

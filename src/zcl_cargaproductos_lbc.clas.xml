@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZCL_OBJETO2_2_LBC</CLSNAME>
+    <CLSNAME>ZCL_CARGAPRODUCTOS_LBC</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>objetos y clases de objetos2</DESCRIPT>
+    <DESCRIPT>productos ejercicio</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

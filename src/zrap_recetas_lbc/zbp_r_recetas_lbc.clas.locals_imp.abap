@@ -10,7 +10,14 @@ CLASS LHC_ZR_RECETAS_LBC DEFINITION INHERITING FROM CL_ABAP_BEHAVIOR_HANDLER.
         IMPORTING keys FOR ZrRecetasLbc~setPublicada,
 
       validateTiempo FOR VALIDATE ON SAVE
-        IMPORTING keys FOR ZrRecetasLbc~validateTiempo.
+        IMPORTING keys FOR ZrRecetasLbc~validateTiempo,
+
+* Ini - Lidia 29/06/26
+      setInitialCategoria FOR DETERMINE ON SAVE
+        IMPORTING keys FOR ZrRecetasLbc~setInitialCategoria.
+* Fin - Lidia 29/06/26
+
+
 ENDCLASS.
 
 CLASS LHC_ZR_RECETAS_LBC IMPLEMENTATION.
@@ -59,6 +66,19 @@ CLASS LHC_ZR_RECETAS_LBC IMPLEMENTATION.
       ENDIF.
 
     ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD setInitialCategoria.
+
+    MODIFY ENTITIES OF zr_recetas_lbc IN LOCAL MODE
+      ENTITY ZrRecetasLbc
+        UPDATE FIELDS ( Categoria )
+        WITH VALUE #( FOR key IN keys ( %tky      = key-%tky
+                                         Categoria = 'N' ) )
+      REPORTED DATA(reported_det).
+
+    reported-zrrecetaslbc = CORRESPONDING #( DEEP reported_det-zrrecetaslbc ).
 
   ENDMETHOD.
 

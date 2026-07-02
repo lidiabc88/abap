@@ -74,23 +74,6 @@ out->write( lt_aeropuertos_l ).
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   ENDMETHOD.
 
 ENDCLASS.
